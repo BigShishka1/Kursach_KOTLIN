@@ -1,0 +1,7 @@
+id,name,surname,faculty,sport,result,date
+1,Ivan,Ivanov,ComputerScience,Running,10.5 sec,01.05.2025
+1,Ivan,Ivanov,ComputerScience,LongJump,6.2 m,15.04.2025
+2,Maria,Petrova,Economics,Swimming,55 sec,20.03.2025
+3,Alexey,Sidorov,PhysicalEducation,BenchPress,120 kg,10.02.2025
+3,Alexey,Sidorov,PhysicalEducation,Running,11.2 sec,05.03.2025
+4,Olga,Smirnova,Mathematics,,, 

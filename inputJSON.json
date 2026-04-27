@@ -1,0 +1,53 @@
+{
+  "students": [
+    {
+      "idStudent": 1,
+      "nameStudent": "Ivan",
+      "secNameStudent": "Ivanov",
+      "faculityStudent": "Informatika",
+      "achievements": [
+        {
+          "sport": "Beg",
+          "result": "10.5 sek",
+          "date": "2025-05-01"
+        },
+        {
+          "sport": "Pryzhki v dlinu",
+          "result": "6.2 m",
+          "date": "2025-04-15"
+        }
+      ]
+    },
+    {
+      "idStudent": 2,
+      "nameStudent": "Mariya",
+      "secNameStudent": "Petrova",
+      "faculityStudent": "Ekonomika",
+      "achievements": [
+        {
+          "sport": "Plavanie",
+          "result": "55 sek",
+          "date": "2025-03-20"
+        }
+      ]
+    },
+    {
+      "idStudent": 3,
+      "nameStudent": "Aleksey",
+      "secNameStudent": "Sidorov",
+      "faculityStudent": "Fizkultura",
+      "achievements": [
+        {
+          "sport": "Zhim lezha",
+          "result": "120 kg",
+          "date": "2025-02-10"
+        },
+        {
+          "sport": "Beg",
+          "result": "11.2 sek",
+          "date": "2025-03-05"
+        }
+      ]
+    }
+  ]
+}
