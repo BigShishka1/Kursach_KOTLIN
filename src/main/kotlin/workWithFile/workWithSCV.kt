@@ -2,8 +2,12 @@ package workWithFile
 
 import com.opencsv.CSVReader
 import java.io.FileReader
+import PrintConsole.*
+import com.opencsv.CSVWriter
+import java.io.FileWriter
 
-fun loadFromCSV(path: String): UniversatyData {
+fun loadFromCSV(path: String, error: error): UniversatyData? {
+    return try {
     val reader = CSVReader(FileReader(path))
     val rows = reader.readAll()
 
@@ -36,6 +40,49 @@ fun loadFromCSV(path: String): UniversatyData {
 
     reader.close()
 
-    return UniversatyData(studentInfo.values.toMutableList())
+    UniversatyData(studentInfo.values.toMutableList())
+    } catch (e: Exception) {
+        error.errorCode = 5
+        null
+    }
 }
 
+fun saveToCSV(path: String, data: UniversatyData?, error: error): Boolean {
+    if(data == null){
+        error.errorCode = 3
+        return false
+    }
+
+    val writer = CSVWriter(FileWriter(path))
+
+    writer.writeNext(arrayOf("id","name","surname","faculty","sport","result","date"))
+
+    for (student in data.students) {
+        if (student.achievements.isEmpty()) {
+            writer.writeNext(arrayOf(
+                student.idStudent.toString(),
+                student.nameStudent,
+                student.secNameStudent,
+                student.faculityStudent,
+                "",
+                "",
+                ""
+            ))
+        } else {
+            for (ach in student.achievements) {
+                writer.writeNext(arrayOf(
+                    student.idStudent.toString(),
+                    student.nameStudent,
+                    student.secNameStudent,
+                    student.faculityStudent,
+                    ach.sport,
+                    ach.result,
+                    ach.date
+                ))
+            }
+        }
+    }
+
+    writer.close()
+    return true
+}

@@ -2,16 +2,15 @@ package workWithDATA
 import workWithFile.*
 import PrintConsole.*
 
-fun addRecord(data: UniversatyData?){
+fun addRecord(data: UniversatyData?, error: error): Boolean{
     if (data == null) {
-        emptyDATA()
-        return
+        error.errorCode = 3
+        return false
     }
-    newRecordGuid()
     val newID = readln().toIntOrNull() ?: -1
     if (newID == -1) {
-        wrongInput()
-        return
+        error.errorCode = 1
+        return false
     }
     val newName = readln()
     val newSecName = readln()
@@ -26,25 +25,28 @@ fun addRecord(data: UniversatyData?){
     }
     var newStudent: Student = Student(newID, newName, newSecName, newFaculty, listAchievment)
     data.students.add(newStudent)
-    successNewDATA()
+    return true
 }
 
-fun delRecord(data: UniversatyData?){
+fun delRecord(data: UniversatyData?, error: error): Boolean{
     if (data == null) {
-        emptyDATA()
-        return
+        error.errorCode = 3
+        return false
     }
 
     val id = readln().toIntOrNull()
 
     if (id == null)
     {
-        wrongInput()
-        return
+        error.errorCode = 1
+        return false
     }
 
     val removed = data.students.removeIf { it.idStudent == id }
 
-    if (removed) dataDel()
-    else dataNotFound()
+    if (removed) return true
+    else {
+        error.errorCode = 4
+        return false
+    }
 }
