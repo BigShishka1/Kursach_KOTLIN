@@ -2,16 +2,20 @@ package workWithDATA
 import workWithFile.*
 import PrintConsole.*
 
-fun addRecord(data: UniversatyData?, error: error): Boolean{
+fun addRecord(data: UniversatyData?, error: error, index: Int): Boolean{
     if (data == null) {
         error.errorCode = 3
         return false
     }
+
+    if (index > 0 && findRecordByIndex(data, error, index) > 0) else return false
+
     val newID = readln().toIntOrNull() ?: -1
     if (newID == -1) {
         error.errorCode = 1
         return false
     }
+
     val newName = readln()
     val newSecName = readln()
     val newFaculty = readln()
@@ -24,7 +28,20 @@ fun addRecord(data: UniversatyData?, error: error): Boolean{
         listAchievment.add(newAchievment)
     }
     var newStudent: Student = Student(newID, newName, newSecName, newFaculty, listAchievment)
-    data.students.add(newStudent)
+
+    when(index){
+        -1 -> data.students.add(newStudent)
+        else -> {
+            val realIndex = data.students.indexOfFirst { it.idStudent == index }
+
+            if (realIndex == -1) {
+                error.errorCode = 4
+                return false
+            }
+
+            data.students[realIndex] = newStudent
+        }
+    }
     return true
 }
 
@@ -51,23 +68,29 @@ fun delRecord(data: UniversatyData?, error: error): Boolean{
     }
 }
 
-private fun findRecordByIndex(data: UniversatyData?, error: error): Int{
+private fun findRecordByIndex(data: UniversatyData?, error: error, index: Int): Int{
     if (data == null) {
         error.errorCode = 3
-        return -1
+        return -2
     }
 
+    val record = data.students.indexOfFirst { it.idStudent == index }
 
-
-}
-
-fun changeRecord(index: Int, data: UniversatyData?, error: error): Boolean{
-    if (data == null) {
-        error.errorCode = 3
-        return false
+    if (record == -1){
+        error.errorCode = 4
+        return record
     }
 
-
-
-    return true
+    return record
 }
+
+//fun changeRecord(index: Int, data: UniversatyData?, error: error): Boolean{
+//    if (data == null) {
+//        error.errorCode = 3
+//        return false
+//    }
+//
+//
+//
+//    return true
+//}

@@ -19,11 +19,20 @@ fun executionCommand(command: Int, data: UniversatyData?, error: error) {
         4 -> {universityDATA = loadFromCSV(pathCSV, error)
             if (universityDATA == null) printError(error)}
         5 -> { newRecordGuid()
-            if (addRecord(data, error)) successNewDATA() else printError(error)}
+            if (addRecord(data, error, -1)) successNewDATA() else printError(error)}
         6 -> if(delRecord(data,error)) dataDel() else printError(error)
-        7 -> if (saveToJson(pathSaveJSON, universityDATA, error)) dataSave(pathSaveJSON) else printError(error)
-        8 -> if (saveToCSV(pathSaveCSV,universityDATA,error)) dataSave(pathSaveCSV) else printError(error)
-        //9 ->
+        7 -> if (saveToJson(pathSaveJSON, data, error)) dataSave(pathSaveJSON) else printError(error)
+        8 -> if (saveToCSV(pathSaveCSV,data,error)) dataSave(pathSaveCSV) else printError(error)
+        9 -> {
+            chandeRecordGuid()
+            val index = readln().toIntOrNull()
+            if (index == null) {
+                wrongInput()
+                return
+            }
+            newRecordGuid()
+            if (addRecord(data, error, index))  else printError(error)
+        }
         else -> wrongNumb()
     }
 }
