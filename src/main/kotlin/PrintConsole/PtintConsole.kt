@@ -15,7 +15,10 @@ fun printMainMenu() {
 |  [3]  Load JSON                  |
 |  [4]  Load CSV                   |
 |  [5]  Add DATA                   |
-|  [6]  del DATA                   |
+|  [6]  Del DATA                   |
+|  [7]  Export to JSON             |
+|  [8]  Export to CSV              |
+|  [9]  Change record              |
 |                                  |
 +----------------------------------+
 |  Enter your choice (1-5):        |
