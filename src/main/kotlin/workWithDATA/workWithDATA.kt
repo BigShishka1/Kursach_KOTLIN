@@ -50,3 +50,24 @@ fun delRecord(data: UniversatyData?, error: error): Boolean{
         return false
     }
 }
+
+private fun findRecordByIndex(data: UniversatyData?, error: error): Int{
+    if (data == null) {
+        error.errorCode = 3
+        return -1
+    }
+
+
+
+}
+
+fun changeRecord(index: Int, data: UniversatyData?, error: error): Boolean{
+    if (data == null) {
+        error.errorCode = 3
+        return false
+    }
+
+
+
+    return true
+}
