@@ -30,7 +30,6 @@ data class UniversatyData(
 fun loadDataFromJson(fileName: String, error: error): UniversatyData? {
     return try {
         val jsonString = File(fileName).readText(Charsets.UTF_8)
-        formedDATA()
         Json.decodeFromString<UniversatyData>(jsonString)
     } catch (e: Exception) {
         error.errorCode = 5

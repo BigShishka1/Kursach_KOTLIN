@@ -24,3 +24,8 @@ kotlin {
     jvmToolchain(24)
 }
 
+sourceSets {
+    main {
+        java.srcDirs("src/main/kotlin")
+    }
+}

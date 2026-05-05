@@ -84,6 +84,39 @@ private fun findRecordByIndex(data: UniversatyData?, error: error, index: Int): 
     return record
 }
 
+fun findInData(data: UniversatyData?, error: error, searсhList: List<Any?>): List<Student>{
+    val result = mutableListOf<Student>()
+    if (data == null) {
+        error.errorCode = 3
+        return result
+    }
+
+    for (student in data.students){
+        if (student.idStudent == searсhList[0]){
+            result.add(student)
+
+        }
+        if (student.nameStudent == searсhList[1]){ result.add(student)
+        continue}
+        if (student.secNameStudent == searсhList[2]){ result.add(student)
+        continue}
+        if (student.faculityStudent == searсhList[3]){ result.add(student)
+        continue}
+        val searchAchievements = searсhList[4] as? List<String> ?: emptyList()
+        if (student.achievements.any { it.sport in searchAchievements }) {
+            result.add(student)
+            continue
+        }
+    }
+
+    if (result.isEmpty()){
+        error.errorCode = 6
+        return result
+    }
+
+    return result
+}
+
 //fun changeRecord(index: Int, data: UniversatyData?, error: error): Boolean{
 //    if (data == null) {
 //        error.errorCode = 3

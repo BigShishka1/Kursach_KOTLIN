@@ -19,6 +19,7 @@ fun printMainMenu() {
 |  [7]  Export to JSON             |
 |  [8]  Export to CSV              |
 |  [9]  Change record              |
+|  [10] Find record                |
 |                                  |
 +----------------------------------+
 |  Enter your choice (1-5):        |
@@ -141,6 +142,15 @@ fun recordChange(){
 """)
 }
 
+fun notFoundRecord(){
+    println("""
++-----------------------------------------+
+|  !          Not found record         !  |
++-----------------------------------------+
+""")
+}
+
+
 fun printDATA(data: UniversatyData?, error: error): Boolean{
     if (data == null) {
         error.errorCode = 3
@@ -175,5 +185,6 @@ fun printError(error: error){
         3 -> emptyDATA()
         4 -> dataNotFound()
         5 -> errorLoadData()
+        6 -> notFoundRecord()
     }
 }

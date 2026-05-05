@@ -5,3 +5,4 @@ id,name,surname,faculty,sport,result,date
 3,Alexey,Sidorov,PhysicalEducation,BenchPress,120 kg,10.02.2025
 3,Alexey,Sidorov,PhysicalEducation,Running,11.2 sec,05.03.2025
 4,Olga,Smirnova,Mathematics,,, 
+5,Ivan,Ivanov,ComputerScience,Running,10.5 sec,01.05.2025

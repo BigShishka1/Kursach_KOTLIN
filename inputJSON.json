@@ -12,7 +12,7 @@
           "date": "2025-05-01"
         },
         {
-          "sport": "Pryzhki v dlinu",
+          "sport": "Pryzhki_v_dlinu",
           "result": "6.2 m",
           "date": "2025-04-15"
         }
@@ -38,7 +38,7 @@
       "faculityStudent": "Fizkultura",
       "achievements": [
         {
-          "sport": "Zhim lezha",
+          "sport": "Zhim_lezha",
           "result": "120 kg",
           "date": "2025-02-10"
         },
