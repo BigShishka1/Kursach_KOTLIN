@@ -2,6 +2,11 @@ import PrintConsole.* //Перенёс выоды в отдельную конс
 import workWithDATA.addRecord
 import workWithDATA.delRecord
 import workWithDATA.findInData
+import workWithDATA.sortData
+import workWithDATA.AgrPock
+import workWithDATA.agrData
+
+
 import workWithFile.*
 
 val pathJSON = "inputJSON.json"
@@ -9,6 +14,7 @@ val pathCSV = "inputCSV.csv"
 val pathSaveJSON = "outputJSON.json"
 val pathSaveCSV = "outputCSV.csv"
 var universityDATA: UniversatyData? = null
+
 
 
 fun executionCommand(command: Int, data: UniversatyData?, error: error) {
@@ -38,7 +44,7 @@ fun executionCommand(command: Int, data: UniversatyData?, error: error) {
             if (addRecord(data, error, index)) recordChange() else printError(error)
         }
         10 -> {
-            println("Search record (intput: 123 / nothing )")
+            println("Search records (intput: 123 / nothing )")
             print("ID student: ")
             var inputID: Int? = readln().toIntOrNull()
             print("Name student: ")
@@ -56,6 +62,45 @@ fun executionCommand(command: Int, data: UniversatyData?, error: error) {
                 studentList.forEach { printElementDATA(it) }
             }
 
+        }
+        11 -> {
+            println("Sorted records ( y / n )")
+            print("ID student: ")
+            val inputID = when (readln()) {
+                "y" -> true
+                "n" -> false
+                else -> false
+            }
+            print("Name student: ")
+            val inputName = when (readln()) {
+                "y" -> true
+                "n" -> false
+                else -> false
+            }
+            print("Second name student: ")
+            val inputSecName = when (readln()) {
+                "y" -> true
+                "n" -> false
+                else -> false
+            }
+            print("Faculity student: ")
+            val inputFaculity = when (readln()) {
+                "y" -> true
+                "n" -> false
+                else -> false
+            }
+            print("Achievements student: ")
+            val inputAchievements = when (readln()) {
+                "y" -> true
+                "n" -> false
+                else -> false
+            }
+            val sortList: List<Boolean> = listOf<Boolean>(inputID, inputName, inputSecName,inputFaculity, inputAchievements)
+            if (sortData(data,error,sortList)) dataSorted() else printError(error)
+        }
+        12 -> {
+            val agrPock: AgrPock? = agrData(data,error)
+            if (agrPock == null) printError(error) else printAgr(agrPock)
         }
         else -> wrongNumb()
     }

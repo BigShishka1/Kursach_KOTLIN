@@ -1,6 +1,19 @@
 package workWithDATA
 import workWithFile.*
-import PrintConsole.*
+import PrintConsole.error
+
+//data class agrPock(
+//    var midPock: MutableMap<String, MutableList<String>>,
+//    var sumPock: MutableMap<String, MutableList<String>>,
+//    var minPock: MutableMap<String, MutableList<String>>,
+//    var maxPock: MutableMap<String, MutableList<String>>)
+
+data class AgrPock(
+    var midPock: MutableMap<String, Double>,
+    var sumPock: MutableMap<String, Double>,
+    var minPock: MutableMap<String, Double>,
+    var maxPock: MutableMap<String, Double>
+)
 
 fun addRecord(data: UniversatyData?, error: error, index: Int): Boolean{
     if (data == null) {
@@ -117,13 +130,91 @@ fun findInData(data: UniversatyData?, error: error, searсhList: List<Any?>): Li
     return result
 }
 
-//fun changeRecord(index: Int, data: UniversatyData?, error: error): Boolean{
+fun sortData(data: UniversatyData?, error: error, sortList: List<Boolean>): Boolean{
+    if (data == null) {
+        error.errorCode = 3
+        return false
+    }
+
+    if (sortList[0]) data.students.sortBy { it.idStudent }
+    if (sortList[1]) data.students.sortBy { it.nameStudent }
+    if (sortList[2]) data.students.sortBy { it.secNameStudent }
+    if (sortList[3]) data.students.sortBy { it.faculityStudent }
+    if (sortList[4]) data.students.sortBy { it.achievements.size }
+
+    return true
+}
+
+//fun agrData(data: UniversatyData?, error: error): agrPock?{
 //    if (data == null) {
 //        error.errorCode = 3
-//        return false
+//        return null
 //    }
 //
+//    val midPokaz = mutableMapOf<String, MutableList<String>>()
+//    val sumPokaz = mutableMapOf<String, MutableList<String>>()
+//    val minPokaz = mutableMapOf<String, MutableList<String>>()
+//    val maxPokaz = mutableMapOf<String, MutableList<String>>()
 //
 //
-//    return true
+//
+//    return agrPock()
 //}
+
+fun parseResult(result: String): Pair<Double, String>? {
+
+    val regex = Regex("""(\d+(\.\d+)?)\s*(\w+)""")
+
+    val match = regex.find(result) ?: return null
+
+    val value = match.groupValues[1].toDouble()
+    val unit = match.groupValues[3]
+
+    return Pair(value, unit)
+}
+
+fun agrData(data: UniversatyData?, error: error): AgrPock? {
+
+    if (data == null) {
+        error.errorCode = 3
+        return null
+    }
+
+    val valuesByUnit = mutableMapOf<String, MutableList<Double>>()
+
+    for (student in data.students) {
+        for (ach in student.achievements) {
+
+            val parsed = parseResult(ach.result)
+
+            if (parsed != null) {
+
+                val (value, unit) = parsed
+
+                valuesByUnit
+                    .getOrPut(unit) { mutableListOf() }
+                    .add(value)
+            }
+        }
+    }
+
+    val midMap = mutableMapOf<String, Double>()
+    val sumMap = mutableMapOf<String, Double>()
+    val minMap = mutableMapOf<String, Double>()
+    val maxMap = mutableMapOf<String, Double>()
+
+    for ((unit, values) in valuesByUnit) {
+
+        midMap[unit] = values.average()
+        sumMap[unit] = values.sum()
+        minMap[unit] = values.min()
+        maxMap[unit] = values.max()
+    }
+
+    return AgrPock(
+        midMap,
+        sumMap,
+        minMap,
+        maxMap
+    )
+}

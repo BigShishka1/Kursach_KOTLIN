@@ -1,6 +1,7 @@
 package PrintConsole
 import workWithFile.UniversatyData
 import workWithFile.Student
+import workWithDATA.AgrPock
 
 data class error (var errorCode: Int)
 
@@ -20,6 +21,8 @@ fun printMainMenu() {
 |  [8]  Export to CSV              |
 |  [9]  Change record              |
 |  [10] Find record                |
+|  [11] Sorted DATA                |
+|  [12] Aggregate indicators       |
 |                                  |
 +----------------------------------+
 |  Enter your choice (1-5):        |
@@ -150,6 +153,14 @@ fun notFoundRecord(){
 """)
 }
 
+fun dataSorted(){
+    println("""
++-----------------------------------------+
+|  !          DATA sorted              !  |
++-----------------------------------------+
+""")
+}
+
 
 fun printDATA(data: UniversatyData?, error: error): Boolean{
     if (data == null) {
@@ -187,4 +198,35 @@ fun printError(error: error){
         5 -> errorLoadData()
         6 -> notFoundRecord()
     }
+}
+
+fun printAgr(pockz: AgrPock) {
+
+    println("""
++-----------------------------------------+
+|         Aggregate indicators            |
++-----------------------------------------+
+""".trimIndent())
+
+    println("MID:")
+    pockz.midPock.forEach {
+        println("   ${it.key}: ${it.value}")
+    }
+
+    println("\nSUM:")
+    pockz.sumPock.forEach {
+        println("   ${it.key}: ${it.value}")
+    }
+
+    println("\nMIN:")
+    pockz.minPock.forEach {
+        println("   ${it.key}: ${it.value}")
+    }
+
+    println("\nMAX:")
+    pockz.maxPock.forEach {
+        println("   ${it.key}: ${it.value}")
+    }
+
+    println("+-----------------------------------------+")
 }
