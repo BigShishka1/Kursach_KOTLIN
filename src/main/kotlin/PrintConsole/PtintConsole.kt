@@ -25,7 +25,7 @@ fun printMainMenu() {
 |  [12] Aggregate indicators       |
 |                                  |
 +----------------------------------+
-|  Enter your choice (1-5):        |
+|  Enter your choice (1-12):       |
 +----------------------------------+
 """)
 }
