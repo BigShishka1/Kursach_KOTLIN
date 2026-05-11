@@ -1,0 +1,79 @@
+{
+    "students": [
+        {
+            "idStudent": 1,
+            "nameStudent": "Ivan",
+            "secNameStudent": "Ivanov",
+            "faculityStudent": "ComputerScience",
+            "achievements": [
+                {
+                    "sport": "Running",
+                    "result": "10.5 sec",
+                    "date": "01.05.2025"
+                },
+                {
+                    "sport": "LongJump",
+                    "result": "6.2 m",
+                    "date": "15.04.2025"
+                }
+            ]
+        },
+        {
+            "idStudent": 2,
+            "nameStudent": "Maria",
+            "secNameStudent": "Petrova",
+            "faculityStudent": "Economics",
+            "achievements": [
+                {
+                    "sport": "Swimming",
+                    "result": "55 sec",
+                    "date": "20.03.2025"
+                }
+            ]
+        },
+        {
+            "idStudent": 3,
+            "nameStudent": "Alexey",
+            "secNameStudent": "Sidorov",
+            "faculityStudent": "PhysicalEducation",
+            "achievements": [
+                {
+                    "sport": "BenchPress",
+                    "result": "120 kg",
+                    "date": "10.02.2025"
+                },
+                {
+                    "sport": "Running",
+                    "result": "11.2 sec",
+                    "date": "05.03.2025"
+                }
+            ]
+        },
+        {
+            "idStudent": 4,
+            "nameStudent": "Olga",
+            "secNameStudent": "Smirnova",
+            "faculityStudent": "Mathematics",
+            "achievements": [
+                {
+                    "sport": "",
+                    "result": "",
+                    "date": " "
+                }
+            ]
+        },
+        {
+            "idStudent": 5,
+            "nameStudent": "Ivan",
+            "secNameStudent": "Ivanov",
+            "faculityStudent": "ComputerScience",
+            "achievements": [
+                {
+                    "sport": "Running",
+                    "result": "10.5 sec",
+                    "date": "01.05.2025"
+                }
+            ]
+        }
+    ]
+}

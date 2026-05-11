@@ -21,7 +21,8 @@ fun addRecord(data: UniversatyData?, error: error, index: Int): Boolean{
         return false
     }
 
-    if (index > 0 && findRecordByIndex(data, error, index) > 0) else return false
+    //if (index > 0 && findRecordByIndex(data, error, index) > 0) else return false
+
 
     val newID = readln().toIntOrNull() ?: -1
     if (newID == -1) {
