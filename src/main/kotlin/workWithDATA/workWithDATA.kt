@@ -2,27 +2,19 @@ package workWithDATA
 import workWithFile.*
 import PrintConsole.error
 
-//data class agrPock(
-//    var midPock: MutableMap<String, MutableList<String>>,
-//    var sumPock: MutableMap<String, MutableList<String>>,
-//    var minPock: MutableMap<String, MutableList<String>>,
-//    var maxPock: MutableMap<String, MutableList<String>>)
-
-data class AgrPock(
+data class AgrPock( //Класс, который будет хранить агрегированные показатели
     var midPock: MutableMap<String, Double>,
     var sumPock: MutableMap<String, Double>,
     var minPock: MutableMap<String, Double>,
     var maxPock: MutableMap<String, Double>
 )
 
+//Функция добавления записей (Данные, объект ошибки, флаг(функция меняет поведения в зависимости от значения))
 fun addRecord(data: UniversatyData?, error: error, index: Int): Boolean{
-    if (data == null) {
+    if (data == null) { //Проверка на пустоту данных
         error.errorCode = 3
         return false
     }
-
-    //if (index > 0 && findRecordByIndex(data, error, index) > 0) else return false
-
 
     val newID = readln().toIntOrNull() ?: -1
     if (newID == -1) {
@@ -30,6 +22,7 @@ fun addRecord(data: UniversatyData?, error: error, index: Int): Boolean{
         return false
     }
 
+    //Ввод полей для записи
     val newName = readln()
     val newSecName = readln()
     val newFaculty = readln()
@@ -41,8 +34,10 @@ fun addRecord(data: UniversatyData?, error: error, index: Int): Boolean{
         val newAchievment: Achievment = Achievment(i, newResult, newDate)
         listAchievment.add(newAchievment)
     }
+    //Формирование новой записи
     var newStudent: Student = Student(newID, newName, newSecName, newFaculty, listAchievment)
 
+    //Запись добавляется либо изменяется в зависимости от флага
     when(index){
         -1 -> data.students.add(newStudent)
         else -> {
@@ -59,56 +54,43 @@ fun addRecord(data: UniversatyData?, error: error, index: Int): Boolean{
     return true
 }
 
+// Удаление записи (Данные, объект ошибки)
 fun delRecord(data: UniversatyData?, error: error): Boolean{
-    if (data == null) {
+    if (data == null) { //Проверка на пустоту данных
         error.errorCode = 3
         return false
     }
 
+    //Индекс удаления записи
     val id = readln().toIntOrNull()
 
-    if (id == null)
+    if (id == null) //Проверка правильности индекса
     {
         error.errorCode = 1
         return false
     }
 
-    val removed = data.students.removeIf { it.idStudent == id }
+    val removed = data.students.removeIf { it.idStudent == id } //Удаление записи
 
-    if (removed) return true
+    if (removed) return true //Если запись удалена возвращает true
     else {
         error.errorCode = 4
         return false
     }
 }
 
-private fun findRecordByIndex(data: UniversatyData?, error: error, index: Int): Int{
-    if (data == null) {
-        error.errorCode = 3
-        return -2
-    }
-
-    val record = data.students.indexOfFirst { it.idStudent == index }
-
-    if (record == -1){
-        error.errorCode = 4
-        return record
-    }
-
-    return record
-}
-
+//Поиск записей (Данные, объект ошибки, список параметров для поиска)
 fun findInData(data: UniversatyData?, error: error, searсhList: List<Any?>): List<Student>{
-    val result = mutableListOf<Student>()
-    if (data == null) {
+    val result = mutableListOf<Student>() //Список содержащий найденные записи
+    if (data == null) { //Проверка на пустоту данных
         error.errorCode = 3
         return result
     }
 
+    //Если значения поля подходит под условие студент заносится в список result
     for (student in data.students){
         if (student.idStudent == searсhList[0]){
             result.add(student)
-
         }
         if (student.nameStudent == searсhList[1]){ result.add(student)
         continue}
@@ -123,7 +105,7 @@ fun findInData(data: UniversatyData?, error: error, searсhList: List<Any?>): Li
         }
     }
 
-    if (result.isEmpty()){
+    if (result.isEmpty()){ //Если записи не нашлись функция завершается с ошибкой
         error.errorCode = 6
         return result
     }
@@ -131,12 +113,14 @@ fun findInData(data: UniversatyData?, error: error, searсhList: List<Any?>): Li
     return result
 }
 
+//Сортировка данных (Данные, объект ошибки, список параметров для сортировки)
 fun sortData(data: UniversatyData?, error: error, sortList: List<Boolean>): Boolean{
-    if (data == null) {
+    if (data == null) { //Проверка на пустоты данных
         error.errorCode = 3
         return false
     }
 
+    //Данные сортируется по параметрам
     if (sortList[0]) data.students.sortBy { it.idStudent }
     if (sortList[1]) data.students.sortBy { it.nameStudent }
     if (sortList[2]) data.students.sortBy { it.secNameStudent }
@@ -146,22 +130,7 @@ fun sortData(data: UniversatyData?, error: error, sortList: List<Boolean>): Bool
     return true
 }
 
-//fun agrData(data: UniversatyData?, error: error): agrPock?{
-//    if (data == null) {
-//        error.errorCode = 3
-//        return null
-//    }
-//
-//    val midPokaz = mutableMapOf<String, MutableList<String>>()
-//    val sumPokaz = mutableMapOf<String, MutableList<String>>()
-//    val minPokaz = mutableMapOf<String, MutableList<String>>()
-//    val maxPokaz = mutableMapOf<String, MutableList<String>>()
-//
-//
-//
-//    return agrPock()
-//}
-
+//Функция, которая разбивает спортивное достижение на значение + вид, использует регулярные выражения
 fun parseResult(result: String): Pair<Double, String>? {
 
     val regex = Regex("""(\d+(\.\d+)?)\s*(\w+)""")
@@ -174,9 +143,10 @@ fun parseResult(result: String): Pair<Double, String>? {
     return Pair(value, unit)
 }
 
+// Вычисление агрегированных показателей (Данные, объект ошибки)
 fun agrData(data: UniversatyData?, error: error): AgrPock? {
 
-    if (data == null) {
+    if (data == null) { //Проверка на пустоту данных
         error.errorCode = 3
         return null
     }

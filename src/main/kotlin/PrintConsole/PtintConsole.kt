@@ -5,7 +5,7 @@ import workWithDATA.AgrPock
 
 data class error (var errorCode: Int)
 
-fun printMainMenu() {
+fun printMainMenu() { //Вывод всех функций
     println("""
 +----------------------------------+
 |            COMMANDS              |
@@ -30,7 +30,7 @@ fun printMainMenu() {
 """)
 }
 
-fun wrongInput(){
+fun wrongInput(){ //Некорректный ввод
     println("""
 +-----------------------------------------+
 |  !         INCORRECT INPUT            ! |
@@ -38,7 +38,7 @@ fun wrongInput(){
 """)
 }
 
-fun wrongNumb(){
+fun wrongNumb(){ //Неверная команда
     println("""
 +-----------------------------------------+
 |  !           WRONG NUMB              !  |
@@ -46,7 +46,7 @@ fun wrongNumb(){
 """)
 }
 
-fun newRecordGuid(){
+fun newRecordGuid(){ //Инструкция при добавлении записи
     println("""
 +---------------------------------------------+
 |  !            New record guid            !  |
@@ -65,7 +65,7 @@ fun newRecordGuid(){
 """)
 }
 
-fun chandeRecordGuid(){
+fun chandeRecordGuid(){ //Инструкция при изменении записи
     println("""
 +---------------------------------------------+
 |  !         Change record guid            !  |
@@ -78,7 +78,7 @@ fun chandeRecordGuid(){
 """)
 }
 
-fun successNewDATA(){
+fun successNewDATA(){ //Новая запись добавлена
     println("""
 +-----------------------------------------+
 |  !           NEW DATA CREATED        !  |
@@ -86,7 +86,7 @@ fun successNewDATA(){
 """)
 }
 
-fun emptyDATA(){
+fun emptyDATA(){ //Данные не сформированы
     println("""
 +-----------------------------------------+
 |  !           DATA IS EMPTY           !  |
@@ -94,8 +94,7 @@ fun emptyDATA(){
 """)
 }
 
-fun formedDATA()
-{
+fun formedDATA() { //Данные сформированы
     println("""
 +-----------------------------------------+
 |  !           FORMED DATA             !  |
@@ -103,7 +102,7 @@ fun formedDATA()
 """)
 }
 
-fun dataDel()
+fun dataDel() //Запись удалены
 {
     println("""
 +-----------------------------------------+
@@ -112,8 +111,7 @@ fun dataDel()
 """)
 }
 
-fun dataNotFound()
-{
+fun dataNotFound() { //Запись не найдена
     println("""
 +-----------------------------------------+
 |  !           DATA NOT FOUND          !  |
@@ -121,7 +119,7 @@ fun dataNotFound()
 """)
 }
 
-fun errorLoadData(){
+fun errorLoadData(){ //Ошибка загрузки данных из файла
     println("""
 +-----------------------------------------+
 |  !          ERROR LOAD DATA          !  |
@@ -129,7 +127,7 @@ fun errorLoadData(){
 """)
 }
 
-fun dataSave(path: String){
+fun dataSave(path: String){ //Данные экспортированы в файл
     println("""
 +-----------------------------------------+
          DATA SAVE AS ${path}          
@@ -137,7 +135,7 @@ fun dataSave(path: String){
 """)
 }
 
-fun recordChange(){
+fun recordChange(){ //Запись изменена
     println("""
 +-----------------------------------------+
 |  !          Record changed           !  |
@@ -145,7 +143,7 @@ fun recordChange(){
 """)
 }
 
-fun notFoundRecord(){
+fun notFoundRecord(){ //Запись не найдена
     println("""
 +-----------------------------------------+
 |  !          Not found record         !  |
@@ -153,7 +151,7 @@ fun notFoundRecord(){
 """)
 }
 
-fun dataSorted(){
+fun dataSorted(){ // Данные отсортированы
     println("""
 +-----------------------------------------+
 |  !          DATA sorted              !  |
@@ -162,7 +160,7 @@ fun dataSorted(){
 }
 
 
-fun printDATA(data: UniversatyData?, error: error): Boolean{
+fun printDATA(data: UniversatyData?, error: error): Boolean{ //Ввод всех записей
     if (data == null) {
         error.errorCode = 3
         return false
@@ -175,7 +173,7 @@ fun printDATA(data: UniversatyData?, error: error): Boolean{
     return true
 }
 
-fun printElementDATA(student: Student){
+fun printElementDATA(student: Student){ // Вывод одной записи
     println("ID: ${student.idStudent}")
     println("   NAME: ${student.nameStudent}")
     println("   SECOND_NAME: ${student.secNameStudent}")
@@ -188,7 +186,7 @@ fun printElementDATA(student: Student){
     }
 }
 
-fun printError(error: error){
+fun printError(error: error){ //Функция вывода ошибок
     val errorCode = error.errorCode
     when(errorCode){
         1 -> wrongInput()
@@ -200,7 +198,7 @@ fun printError(error: error){
     }
 }
 
-fun printAgr(pockz: AgrPock) {
+fun printAgr(pockz: AgrPock) { //Вывод агрегированных показателей
 
     println("""
 +-----------------------------------------+
