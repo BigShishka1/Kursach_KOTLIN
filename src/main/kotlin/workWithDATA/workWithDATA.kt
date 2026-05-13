@@ -171,7 +171,7 @@ fun agrData(data: UniversatyData?, error: error): AgrPock? {
         }
     }
 
-    //Списки для значений полей, позже они использу
+    //Списки для значений полей, позже они используются для подсчёта
     val midMap = mutableMapOf<String, Double>()
     val sumMap = mutableMapOf<String, Double>()
     val minMap = mutableMapOf<String, Double>()
