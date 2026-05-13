@@ -150,18 +150,20 @@ fun agrData(data: UniversatyData?, error: error): AgrPock? {
         error.errorCode = 3
         return null
     }
-
+    //Коллекция для хранения полученных после парса результатов
     val valuesByUnit = mutableMapOf<String, MutableList<Double>>()
 
+    //Перебор студентов
     for (student in data.students) {
         for (ach in student.achievements) {
-
+            //Парс
             val parsed = parseResult(ach.result)
 
             if (parsed != null) {
 
                 val (value, unit) = parsed
 
+                //Если ключа ещё не было он создаётся + добавляется значения
                 valuesByUnit
                     .getOrPut(unit) { mutableListOf() }
                     .add(value)
@@ -169,19 +171,21 @@ fun agrData(data: UniversatyData?, error: error): AgrPock? {
         }
     }
 
+    //Списки для значений полей, позже они использу
     val midMap = mutableMapOf<String, Double>()
     val sumMap = mutableMapOf<String, Double>()
     val minMap = mutableMapOf<String, Double>()
     val maxMap = mutableMapOf<String, Double>()
 
+    //Пересчёт агрегированных состояний
     for ((unit, values) in valuesByUnit) {
-
         midMap[unit] = values.average()
         sumMap[unit] = values.sum()
         minMap[unit] = values.min()
         maxMap[unit] = values.max()
     }
 
+    //Возврат итогового объект содержащего эти параметры
     return AgrPock(
         midMap,
         sumMap,
